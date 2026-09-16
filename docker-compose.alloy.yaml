@@ -1,0 +1,16 @@
+services:
+  web:
+    image: node:22-bookworm
+    working_dir: /workspace
+    network_mode: host
+    environment:
+      PORT: 3000
+      HOST: 0.0.0.0
+      BROWSER: none
+      CI: "false"
+      DANGEROUSLY_DISABLE_HOST_CHECK: "true"
+      WDS_SOCKET_PORT: 8080
+      IS_ALLOY: ${IS_ALLOY:-false}
+    volumes:
+      - .:/workspace
+    command: bash -lc "npm install --legacy-peer-deps && npm start"
